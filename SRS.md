@@ -191,6 +191,16 @@ flowchart TD
 | **FR21** | Tích hợp thanh toán | Hệ thống phải tích hợp với nhà cung cấp thanh toán bên ngoài để xử lý thanh toán điện tử. | Hệ thống / Payment Provider | BR11 |
 | **FR22** | Bảo vệ dữ liệu thanh toán | Hệ thống không được lưu trực tiếp thông tin nhạy cảm của thẻ hoặc tài khoản thanh toán. | Hệ thống | BR12 |
 | **FR23** | Xử lý thanh toán thất bại | Khi giao dịch thanh toán điện tử thất bại, hệ thống phải thông báo cho khách hàng và cho phép xử lý lại theo chính sách của doanh nghiệp. | Hệ thống | BR13 |
+| **FR24** | **Gửi thông báo** | Hệ thống phải gửi thông báo cho khách hàng và tài xế khi có các sự kiện liên quan đến đặt xe, chuyến đi và thanh toán. | Hệ thống | BR14 |
+| **FR25** | **Xem lịch sử chuyến** | Hệ thống phải cho phép khách hàng xem lịch sử các chuyến đã thực hiện và thông tin liên quan đến chuyến. | Khách hàng | BR15 |
+| **FR26** | **Đánh giá tài xế** | Hệ thống phải cho phép khách hàng đánh giá tài xế sau khi chuyến đi hoàn thành. | Khách hàng | BR16 |
+| **FR27** | **Quản lý phương tiện** | Hệ thống phải cho phép nhân viên vận hành xem và cập nhật thông tin phương tiện được sử dụng trong hệ thống. | Nhân viên vận hành | BR17 |
+| **FR28** | **Quản lý khách hàng** | Hệ thống phải cho phép nhân viên vận hành xem và quản lý thông tin khách hàng. | Nhân viên vận hành | BR17 |
+| **FR29** | **Quản lý tài xế** | Hệ thống phải cho phép nhân viên vận hành xem và quản lý thông tin tài xế. | Nhân viên vận hành | BR17 |
+| **FR30** | **Quản lý chuyến đi** | Hệ thống phải cho phép nhân viên vận hành theo dõi và quản lý các chuyến đi trong hệ thống. | Nhân viên vận hành | BR17 |
+| **FR31** | **Tra cứu giao dịch** | Hệ thống phải cho phép nhân viên vận hành tra cứu thông tin các giao dịch thanh toán. | Nhân viên vận hành | BR17 |
+| **FR32** | **Xử lý chuyến lỗi** | Hệ thống phải cho phép nhân viên vận hành tiếp nhận và xử lý các trường hợp chuyến đi phát sinh lỗi. | Nhân viên vận hành | BR17 |
+| **FR33** | **Xem báo cáo hoạt động** | Hệ thống phải cho phép ban lãnh đạo xem báo cáo về số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động của tài xế. | Ban lãnh đạo | BR18 |
 # 8. Business Rules và Business Exceptions
 
 ## 8.1. Business Rules – Quy định nghiệp vụ
