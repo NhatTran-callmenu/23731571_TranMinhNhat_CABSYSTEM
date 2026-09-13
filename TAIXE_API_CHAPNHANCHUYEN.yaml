@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info: {title: CAB - API Chấp nhận hoặc từ chối chuyến, version: 1.0.0}
+servers: [{url: http://localhost:8080/api}]
+paths:
+  /drivers/trip-requests/{bookingId}/response:
+    post:
+      summary: Phản hồi yêu cầu chuyến
+      parameters:
+        - {name: bookingId, in: path, required: true, schema: {type: string}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action: {type: string, enum: [ACCEPT, REJECT]}
+      responses:
+        '200': {description: Đã ghi nhận phản hồi}

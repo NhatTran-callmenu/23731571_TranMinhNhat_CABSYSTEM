@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info: {title: CAB - API Đặt xe, version: 1.0.0}
+servers: [{url: http://localhost:8080/api}]
+paths:
+  /bookings:
+    post:
+      summary: Tạo yêu cầu đặt xe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [pickupLocation, destination, vehicleType]
+              properties:
+                pickupLocation: {type: string}
+                destination: {type: string}
+                vehicleType: {type: string, enum: [MOTORBIKE, CAR]}
+      responses:
+        '201': {description: Đặt xe thành công}
+        '400': {description: Dữ liệu không hợp lệ}

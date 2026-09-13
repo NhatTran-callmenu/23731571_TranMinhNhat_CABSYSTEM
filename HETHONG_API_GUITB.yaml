@@ -1,0 +1,24 @@
+openapi: 3.0.3
+info:
+  title: CAB - API Gửi thông báo
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+paths:
+  /notifications:
+    post:
+      summary: Gửi thông báo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [recipientId, recipientType, eventType, message]
+              properties:
+                recipientId: {type: string, example: CUS001}
+                recipientType: {type: string, enum: [CUSTOMER, DRIVER]}
+                eventType: {type: string, example: DRIVER_ACCEPTED}
+                message: {type: string, example: Tài xế đã nhận chuyến của bạn.}
+      responses:
+        '202': {description: Đã tiếp nhận yêu cầu gửi thông báo}

@@ -1,0 +1,19 @@
+openapi: 3.0.3
+info: {title: CAB - API Thanh toán, version: 1.0.0}
+servers: [{url: http://localhost:8080/api}]
+paths:
+  /payments:
+    post:
+      summary: Thực hiện thanh toán
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId, method]
+              properties:
+                tripId: {type: string}
+                method: {type: string, enum: [CASH, ELECTRONIC]}
+      responses:
+        '201': {description: Yêu cầu thanh toán được ghi nhận}

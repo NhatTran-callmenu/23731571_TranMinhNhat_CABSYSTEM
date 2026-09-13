@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: CAB - API Quản lý phương tiện
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+tags:
+  - name: Nhân viên vận hành
+paths:
+  /operations/vehicles:
+    get:
+      tags: [Nhân viên vận hành]
+      summary: Lấy danh sách phương tiện
+      responses:
+        '200': {description: Danh sách phương tiện}
+    post:
+      tags: [Nhân viên vận hành]
+      summary: Thêm phương tiện
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/VehicleRequest' }
+      responses:
+        '201': {description: Thêm phương tiện thành công}
+  /operations/vehicles/{vehicleId}:
+    get:
+      tags: [Nhân viên vận hành]
+      summary: Xem chi tiết phương tiện
+      parameters:
+        - {name: vehicleId, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Thông tin phương tiện}
+        '404': {description: Không tìm thấy phương tiện}
+    put:
+      tags: [Nhân viên vận hành]
+      summary: Cập nhật phương tiện
+      parameters:
+        - {name: vehicleId, in: path, required: true, schema: {type: string}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/VehicleRequest' }
+      responses:
+        '200': {description: Cập nhật thành công}
+    delete:
+      tags: [Nhân viên vận hành]
+      summary: Xóa phương tiện
+      parameters:
+        - {name: vehicleId, in: path, required: true, schema: {type: string}}
+      responses:
+        '204': {description: Xóa thành công}
+components:
+  schemas:
+    VehicleRequest:
+      type: object
+      required: [licensePlate, vehicleType]
+      properties:
+        licensePlate: {type: string, example: 51A-123.45}
+        vehicleType: {type: string, enum: [MOTORBIKE, CAR], example: CAR}
+        brand: {type: string, example: Toyota}
+        model: {type: string, example: Vios}
+        status: {type: string, enum: [ACTIVE, INACTIVE], example: ACTIVE}
+        driverId: {type: string, nullable: true, example: DRV001}
