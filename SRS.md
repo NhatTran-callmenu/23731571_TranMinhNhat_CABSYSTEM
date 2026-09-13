@@ -83,6 +83,11 @@ flowchart LR
 | **BR11** | Hệ thống phải tích hợp với nhà cung cấp thanh toán bên ngoài khi khách hàng sử dụng phương thức thanh toán điện tử. | BS08 |
 | **BR12** | Hệ thống không được lưu trực tiếp thông tin nhạy cảm của thẻ hoặc tài khoản thanh toán. | BS08 |
 | **BR13** | Khi thanh toán điện tử thất bại, hệ thống phải thông báo cho khách hàng và cho phép xử lý lại theo chính sách của doanh nghiệp. | BS09 |
+| **BR14** | Hệ thống phải hỗ trợ gửi thông báo cho khách hàng và tài xế khi phát sinh các sự kiện liên quan đến đặt xe, chuyến đi và thanh toán. | BS10 |
+| **BR15** | Hệ thống phải cho phép khách hàng xem lịch sử các chuyến đã thực hiện và thông tin liên quan đến chuyến. | BS13 |
+| **BR16** | Hệ thống phải cho phép khách hàng đánh giá tài xế sau khi chuyến đi hoàn thành. | BS14 |
+| **BR17** | Hệ thống phải hỗ trợ nhân viên vận hành quản lý khách hàng, tài xế, phương tiện, chuyến đi, giao dịch và xử lý các trường hợp chuyến bị lỗi. | BS11 |
+| **BR18** | Hệ thống phải cung cấp báo cáo về số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động của tài xế cho ban lãnh đạo. | BS12 |
 
 # 5 Business Scenarios – Tình huống nghiệp vụ
 
@@ -100,6 +105,8 @@ flowchart LR
 | **BS10** | **Gửi thông báo** | Hệ thống / Notification Provider | Hệ thống phát sinh các sự kiện liên quan đến đặt xe, chuyến đi hoặc thanh toán. | Thông báo được gửi đến khách hàng hoặc tài xế tương ứng. |
 | **BS11** | **Nhân viên vận hành xử lý hoạt động** | Nhân viên vận hành | Nhân viên vận hành quản lý khách hàng, tài xế, phương tiện, chuyến đi và giao dịch; đồng thời xử lý các trường hợp chuyến bị lỗi. | Hoạt động vận hành được theo dõi và hỗ trợ thông qua hệ thống. |
 | **BS12** | **Ban lãnh đạo theo dõi báo cáo** | Ban lãnh đạo | Ban lãnh đạo theo dõi số lượng chuyến, doanh thu, tỷ lệ hoàn thành, tỷ lệ hủy và hiệu quả hoạt động của tài xế. | Các thông tin báo cáo được cung cấp để theo dõi hoạt động hệ thống. |
+| **BS13** | **Khách hàng xem lịch sử chuyến** | Khách hàng | Khách hàng truy cập chức năng lịch sử để xem các chuyến đã thực hiện và thông tin liên quan. | Lịch sử chuyến được hiển thị đầy đủ cho khách hàng. |
+| **BS14** | **Khách hàng đánh giá tài xế** | Khách hàng | Sau khi chuyến hoàn thành, khách hàng thực hiện đánh giá tài xế. | Đánh giá của khách hàng được hệ thống ghi nhận. |
 
 # 6. Xây dựng mô hình – Quy trình nghiệp vụ
 
