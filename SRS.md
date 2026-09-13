@@ -379,9 +379,6 @@ Thiết kế Use Case được xây dựng dựa trên các Functional Requireme
 
 ---
 
-## 12.4. Use Case Diagram tổng quát
-
-## 12.4. Use Case Diagram tổng quát
 
 ## 12.4. Use Case Diagram tổng quát
 
