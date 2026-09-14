@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: Customer Management API
+  version: 1.0.0
+  description: CRUD API for operation staff to manage customer information.
+servers:
+  - url: /api
+paths:
+  /customers:
+    get:
+      summary: List customers
+      operationId: listCustomers
+      tags: [Operation]
+      responses:
+        '200': {description: Customer list returned.}
+    post:
+      summary: Create a customer record
+      operationId: createCustomer
+      tags: [Operation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName: {type: string}
+                email: {type: string, format: email}
+                phone: {type: string}
+      responses:
+        '201': {description: Customer created.}
+  /customers/{customerId}:
+    get:
+      summary: Get customer
+      operationId: getCustomer
+      tags: [Operation]
+      parameters:
+        - {in: path, name: customerId, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Customer returned.}
+        '404': {description: Customer not found.}
+    put:
+      summary: Update customer
+      operationId: updateCustomerByStaff
+      tags: [Operation]
+      parameters:
+        - {in: path, name: customerId, required: true, schema: {type: string}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName: {type: string}
+                email: {type: string, format: email}
+                phone: {type: string}
+                status: {type: string}
+      responses:
+        '200': {description: Customer updated.}
+        '404': {description: Customer not found.}
+    delete:
+      summary: Delete customer
+      operationId: deleteCustomer
+      tags: [Operation]
+      parameters:
+        - {in: path, name: customerId, required: true, schema: {type: string}}
+      responses:
+        '204': {description: Customer deleted.}
+        '404': {description: Customer not found.}

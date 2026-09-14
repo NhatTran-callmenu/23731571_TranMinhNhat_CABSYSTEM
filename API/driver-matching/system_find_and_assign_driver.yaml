@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: Driver Matching API
+  version: 1.0.0
+  description: API for finding and assigning a suitable driver using location, readiness and operational criteria.
+servers:
+  - url: /api
+paths:
+  /driver-matching:
+    post:
+      summary: Find and assign a driver
+      operationId: findAndAssignDriver
+      tags: [Driver Matching]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [bookingId]
+              properties:
+                bookingId: {type: string}
+                pickupLocation: {type: string}
+                vehicleType: {type: string}
+      responses:
+        '200':
+          description: A suitable driver was identified and a trip request was sent.
+        '404':
+          description: No suitable driver was found.

@@ -1,0 +1,36 @@
+openapi: 3.0.3
+info:
+  title: Customer Payment API
+  version: 1.0.0
+  description: API for customer payment by cash or electronic payment.
+servers:
+  - url: /api
+paths:
+  /trips/{tripId}/payment:
+    post:
+      summary: Pay for a completed trip
+      operationId: createPayment
+      tags: [Payment]
+      parameters:
+        - in: path
+          name: tripId
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [method]
+              properties:
+                method:
+                  type: string
+                  enum: [CASH, ELECTRONIC]
+      responses:
+        '200':
+          description: Payment recorded or forwarded for electronic processing.
+        '400':
+          description: Invalid payment request.
+        '404':
+          description: Trip not found.

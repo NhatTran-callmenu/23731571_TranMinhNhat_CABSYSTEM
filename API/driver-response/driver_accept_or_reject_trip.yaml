@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: Driver Trip Response API
+  version: 1.0.0
+  description: API for a driver to accept or reject a trip request.
+servers:
+  - url: /api
+paths:
+  /trips/{tripId}/accept:
+    put:
+      summary: Accept a trip
+      operationId: acceptTrip
+      tags: [Driver Response]
+      parameters:
+        - in: path
+          name: tripId
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Trip accepted and assigned to the driver.
+        '404':
+          description: Trip request not found.
+  /trips/{tripId}/reject:
+    put:
+      summary: Reject a trip
+      operationId: rejectTrip
+      tags: [Driver Response]
+      parameters:
+        - in: path
+          name: tripId
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Trip rejected; the system may continue matching another driver.
+        '404':
+          description: Trip request not found.

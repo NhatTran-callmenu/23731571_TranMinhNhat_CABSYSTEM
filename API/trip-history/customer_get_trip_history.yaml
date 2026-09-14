@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  title: Trip History API
+  version: 1.0.0
+  description: API for customers to view completed trip history and related information.
+servers:
+  - url: /api
+paths:
+  /customers/{customerId}/trips/history:
+    get:
+      summary: Get customer trip history
+      operationId: getTripHistory
+      tags: [Trip History]
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Trip history returned.
+        '404':
+          description: Customer not found.

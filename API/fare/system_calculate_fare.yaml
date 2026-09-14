@@ -1,0 +1,39 @@
+openapi: 3.0.3
+info:
+  title: Fare Calculation API
+  version: 1.0.0
+  description: API for determining the amount payable after a trip is completed.
+servers:
+  - url: /api
+paths:
+  /fares/calculate:
+    post:
+      summary: Calculate fare
+      operationId: calculateFare
+      tags: [Fare]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId, vehicleType]
+              properties:
+                tripId: {type: string}
+                vehicleType: {type: string}
+                distance: {type: number, format: double}
+                duration: {type: integer, description: Trip duration in minutes.}
+      responses:
+        '200':
+          description: Fare amount determined.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tripId: {type: string}
+                  amount: {type: number, format: double}
+        '400':
+          description: Invalid trip information.
+        '404':
+          description: Trip not found.

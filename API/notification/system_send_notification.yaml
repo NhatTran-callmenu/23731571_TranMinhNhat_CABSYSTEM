@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: Notification API
+  version: 1.0.0
+  description: API for sending notifications related to booking, trip and payment events.
+servers:
+  - url: /api
+paths:
+  /notifications:
+    post:
+      summary: Send a notification
+      operationId: sendNotification
+      tags: [Notification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [recipientId, message]
+              properties:
+                recipientId: {type: string}
+                recipientType:
+                  type: string
+                  enum: [CUSTOMER, DRIVER]
+                eventType: {type: string}
+                message: {type: string}
+      responses:
+        '202':
+          description: Notification accepted for delivery.
+        '400':
+          description: Invalid notification request.
+        '502':
+          description: Notification provider unavailable.

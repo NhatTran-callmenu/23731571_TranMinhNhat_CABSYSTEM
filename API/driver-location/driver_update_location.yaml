@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: Driver Location API
+  version: 1.0.0
+  description: API for updating driver location used by driver matching and estimated arrival support.
+servers:
+  - url: /api
+paths:
+  /drivers/{driverId}/location:
+    put:
+      summary: Update driver location
+      operationId: updateDriverLocation
+      tags: [Driver Location]
+      parameters:
+        - in: path
+          name: driverId
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [latitude, longitude]
+              properties:
+                latitude: {type: number, format: double}
+                longitude: {type: number, format: double}
+      responses:
+        '200':
+          description: Driver location updated.
+        '404':
+          description: Driver not found.

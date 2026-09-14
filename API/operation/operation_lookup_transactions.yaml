@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  title: Transaction Lookup API
+  version: 1.0.0
+  description: API for operation staff to query payment transactions.
+servers:
+  - url: /api
+paths:
+  /transactions:
+    get:
+      summary: Search payment transactions
+      operationId: lookupTransactions
+      tags: [Operation]
+      parameters:
+        - {in: query, name: tripId, required: false, schema: {type: string}}
+        - {in: query, name: status, required: false, schema: {type: string}}
+      responses:
+        '200': {description: Transaction results returned.}

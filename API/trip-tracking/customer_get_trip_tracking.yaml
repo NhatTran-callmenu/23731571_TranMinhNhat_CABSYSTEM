@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  title: Trip Tracking API
+  version: 1.0.0
+  description: API for customers to view the current status and driver information of a trip.
+servers:
+  - url: /api
+paths:
+  /trips/{tripId}/tracking:
+    get:
+      summary: Track a trip
+      operationId: getTripTracking
+      tags: [Trip Tracking]
+      parameters:
+        - in: path
+          name: tripId
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Current trip status and driver information.
+        '404':
+          description: Trip not found.

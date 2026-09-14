@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: Driver Rating API
+  version: 1.0.0
+  description: API for customers to rate a driver after a completed trip.
+servers:
+  - url: /api
+paths:
+  /trips/{tripId}/rating:
+    post:
+      summary: Rate a driver
+      operationId: rateDriver
+      tags: [Rating]
+      parameters:
+        - in: path
+          name: tripId
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rating]
+              properties:
+                rating:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                comment: {type: string}
+      responses:
+        '201': {description: Rating recorded.}
+        '400': {description: Rating is invalid or trip is not completed.}
+        '404': {description: Trip not found.}

@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  title: Trip Error Handling API
+  version: 1.0.0
+  description: API for operation staff to receive and handle trips with errors.
+servers:
+  - url: /api
+paths:
+  /trip-errors:
+    get:
+      summary: List trip error cases
+      operationId: listTripErrors
+      tags: [Operation]
+      responses:
+        '200': {description: Trip error cases returned.}
+    post:
+      summary: Create a trip error case
+      operationId: createTripError
+      tags: [Operation]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tripId, description]
+              properties:
+                tripId: {type: string}
+                description: {type: string}
+      responses:
+        '201': {description: Trip error case created.}
+  /trip-errors/{errorId}:
+    put:
+      summary: Update a trip error case
+      operationId: updateTripError
+      tags: [Operation]
+      parameters:
+        - {in: path, name: errorId, required: true, schema: {type: string}}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status: {type: string}
+                resolution: {type: string}
+      responses:
+        '200': {description: Trip error case updated.}
+        '404': {description: Error case not found.}

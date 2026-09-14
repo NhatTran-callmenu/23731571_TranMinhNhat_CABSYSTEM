@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: Customer Profile Update API
+  version: 1.0.0
+  description: API for updating customer personal information.
+servers:
+  - url: /api
+paths:
+  /customers/{customerId}:
+    put:
+      summary: Update customer information
+      operationId: updateCustomer
+      tags: [Authentication]
+      parameters:
+        - in: path
+          name: customerId
+          required: true
+          schema: {type: string}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fullName: {type: string}
+                email: {type: string, format: email}
+                phone: {type: string}
+                address: {type: string}
+      responses:
+        '200':
+          description: Customer information updated.
+        '404':
+          description: Customer not found.

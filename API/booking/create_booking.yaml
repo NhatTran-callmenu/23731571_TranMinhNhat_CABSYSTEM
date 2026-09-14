@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: Create Booking API
+  version: 1.0.0
+  description: API for creating a ride booking with pickup, destination and vehicle type.
+servers:
+  - url: /api
+paths:
+  /bookings:
+    post:
+      summary: Create a ride booking
+      operationId: createBooking
+      tags: [Booking]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [customerId, pickupLocation, destination, vehicleType]
+              properties:
+                customerId: {type: string}
+                pickupLocation: {type: string}
+                destination: {type: string}
+                vehicleType: {type: string}
+      responses:
+        '201':
+          description: Booking created and accepted for driver matching.
+        '400':
+          description: Invalid booking information.

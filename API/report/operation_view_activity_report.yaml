@@ -1,0 +1,19 @@
+openapi: 3.0.3
+info:
+  title: Activity Report API
+  version: 1.0.0
+  description: API for management to view operational reports.
+servers:
+  - url: /api
+paths:
+  /reports/activity:
+    get:
+      summary: Get activity report
+      operationId: getActivityReport
+      tags: [Report]
+      parameters:
+        - {in: query, name: from, required: false, schema: {type: string, format: date}}
+        - {in: query, name: to, required: false, schema: {type: string, format: date}}
+      responses:
+        '200':
+          description: Report returned with trip count, revenue, completion/cancellation rates and driver performance.

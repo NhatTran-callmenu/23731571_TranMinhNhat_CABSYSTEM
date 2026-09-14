@@ -1,9 +1,0 @@
-openapi: 3.0.3
-info: {title: CAB - API Xem lịch sử chuyến, version: 1.0.0}
-servers: [{url: http://localhost:8080/api}]
-paths:
-  /customers/me/trips/history:
-    get:
-      summary: Xem lịch sử chuyến
-      responses:
-        '200': {description: Danh sách lịch sử chuyến}
