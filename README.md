@@ -48,48 +48,67 @@ Thanh toán
     ↓
 Xử lý thanh toán điện tử (nếu có)
 ```
-5. Chức năng chính
-Authentication
-Đăng ký tài khoản khách hàng.
-Đăng ký tài khoản tài xế.
-Đăng nhập khách hàng.
-Đăng nhập tài xế.
-Cập nhật thông tin khách hàng.
-Cập nhật thông tin tài xế.
-Booking & Driver Matching
-Tạo yêu cầu đặt xe.
-Tìm tài xế phù hợp.
-Phân công tài xế.
-Tài xế chấp nhận hoặc từ chối chuyến.
-Tìm tài xế tiếp theo khi bị từ chối hoặc không phản hồi.
-Trip
-Cập nhật trạng thái chuyến.
-Cập nhật vị trí tài xế.
-Theo dõi chuyến.
-Xem lịch sử chuyến.
-Fare & Payment
-Tính cước chuyến đi.
-Thanh toán tiền mặt.
-Thanh toán điện tử.
-Xử lý giao dịch thông qua Payment Provider.
-Xử lý thanh toán thất bại.
-Notification & Rating
-Gửi thông báo.
-Thông báo khi không tìm được tài xế.
-Thông báo kết quả thanh toán.
-Khách hàng đánh giá tài xế.
-Operation
-Quản lý khách hàng.
-Quản lý tài xế.
-Quản lý phương tiện.
-Quản lý chuyến đi.
-Tra cứu giao dịch.
-Xử lý chuyến bị lỗi.
-Xem báo cáo hoạt động.
-6. API Documentation
+## 5. Các chức năng chính
 
-Các API được tổ chức theo từng nhóm nghiệp vụ:
+### 5.1. Quản lý tài khoản
 
+- Đăng ký tài khoản khách hàng.
+- Đăng ký tài khoản tài xế.
+- Đăng nhập.
+- Cập nhật thông tin cá nhân.
+- Tài xế cập nhật thông tin phương tiện và trạng thái hoạt động.
+
+### 5.2. Đặt xe và phân công tài xế
+
+- Nhập điểm đón.
+- Nhập điểm đến.
+- Lựa chọn loại xe.
+- Tạo yêu cầu đặt xe.
+- Tìm tài xế phù hợp dựa trên vị trí, trạng thái sẵn sàng và tiêu chí vận hành.
+- Phân công tài xế.
+- Tìm tài xế tiếp theo khi tài xế từ chối hoặc không phản hồi.
+- Thông báo khi không tìm được tài xế.
+
+### 5.3. Quản lý chuyến đi
+
+- Tài xế chấp nhận hoặc từ chối chuyến.
+- Cập nhật trạng thái chuyến.
+- Cập nhật vị trí tài xế.
+- Khách hàng theo dõi trạng thái chuyến.
+- Ghi nhận chuyến hoàn thành.
+- Xem lịch sử chuyến.
+
+### 5.4. Tính cước và thanh toán
+
+- Xác định số tiền khách hàng phải trả.
+- Thanh toán bằng tiền mặt.
+- Thanh toán điện tử.
+- Tích hợp với Payment Provider.
+- Bảo vệ dữ liệu thanh toán.
+- Xử lý trường hợp thanh toán thất bại.
+
+### 5.5. Thông báo và đánh giá
+
+- Gửi thông báo đến khách hàng và tài xế.
+- Thông báo khi không tìm được tài xế.
+- Thông báo kết quả thanh toán.
+- Khách hàng đánh giá tài xế sau chuyến đi.
+
+### 5.6. Quản lý vận hành
+
+- Quản lý khách hàng.
+- Quản lý tài xế.
+- Quản lý phương tiện.
+- Quản lý chuyến đi.
+- Tra cứu giao dịch.
+- Xử lý chuyến bị lỗi.
+- Xem báo cáo hoạt động.
+
+## 6. Cấu trúc API
+
+Các API được phân chia theo từng nhóm nghiệp vụ:
+
+```text
 API/
 ├── authentication/
 ├── booking/
