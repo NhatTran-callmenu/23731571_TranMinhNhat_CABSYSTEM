@@ -412,103 +412,144 @@ Thiết kế Use Case được xây dựng dựa trên các Functional Requireme
 flowchart LR
 
     %% =========================
-    %% ACTORS
+    %% ACTORS BÊN TRÁI
     %% =========================
-    KH[👤 Khách hàng]
-    TX[👤 Tài xế]
-    NV[👤 Nhân viên vận hành]
-    BL[👤 Ban lãnh đạo]
-    PP[⚙ Payment Provider]
-    NP[⚙ Notification Provider]
+    KH[Khách hàng]
+    TX[Tài xế]
 
     %% =========================
-    %% SYSTEM BOUNDARY
+    %% ACTORS BÊN PHẢI
+    %% =========================
+    NV[Nhân viên vận hành]
+    BL[Ban lãnh đạo]
+    PP[Payment Provider]
+    NP[Notification Provider]
+
+    %% =========================
+    %% CAB SYSTEM
     %% =========================
     subgraph CAB["CAB SYSTEM"]
         direction TB
 
         %% ===== TÀI KHOẢN =====
-        UC01((Đăng ký tài khoản))
-        UC02((Đăng nhập))
-        UC03((Cập nhật thông tin))
+        A((Đăng ký tài khoản))
+        B((Đăng nhập))
+        C((Cập nhật thông tin))
 
         %% ===== ĐẶT XE =====
-        UC04((Đặt xe))
-        UC05((Tìm và phân công tài xế))
-        UC06((Chấp nhận / Từ chối chuyến))
+        D((Đặt xe))
+        E((Tìm và phân công tài xế))
+        F((Chấp nhận / từ chối chuyến))
 
-        %% ===== CHUYẾN ĐI =====
-        UC07((Theo dõi chuyến))
-        UC08((Thực hiện chuyến))
+        %% ===== CHUYẾN =====
+        G((Theo dõi chuyến))
+        H((Thực hiện chuyến))
 
         %% ===== THANH TOÁN =====
-        UC09((Tính cước))
-        UC10((Thanh toán))
-        UC11((Xử lý thanh toán điện tử))
+        I((Tính cước))
+        J((Thanh toán))
+        K((Xử lý thanh toán điện tử))
 
         %% ===== THÔNG BÁO =====
-        UC12((Gửi thông báo))
+        L((Gửi thông báo))
 
         %% ===== SAU CHUYẾN =====
-        UC13((Xem lịch sử chuyến))
-        UC14((Đánh giá tài xế))
+        M((Xem lịch sử chuyến))
+        N((Đánh giá tài xế))
 
         %% ===== QUẢN LÝ =====
-        UC15((Quản lý khách hàng))
-        UC16((Quản lý tài xế))
-        UC17((Quản lý phương tiện))
-        UC18((Quản lý chuyến đi))
-        UC19((Tra cứu lịch sử giao dịch))
-        UC20((Xử lý chuyến bị lỗi))
+        O((Quản lý khách hàng))
+        P((Quản lý tài xế))
+        Q((Quản lý phương tiện))
+        R((Quản lý chuyến đi))
+        S((Tra cứu lịch sử giao dịch))
+        T((Xử lý chuyến bị lỗi))
 
         %% ===== BÁO CÁO =====
-        UC21((Xem báo cáo))
+        U((Xem báo cáo hoạt động))
+
+
+        %% =========================
+        %% LUỒNG NGHIỆP VỤ CHÍNH
+        %% =========================
+        B --> D
+        D --> E
+        E --> F
+        F --> H
+        H --> I
+        I --> J
+        J --> K
+
+
+        %% =========================
+        %% CHỨC NĂNG HỖ TRỢ
+        %% =========================
+        H --> G
+        H --> L
+        H --> M
+        H --> N
+
+
+        %% =========================
+        %% NGOẠI LỆ
+        %% =========================
+        F -. "Từ chối / không phản hồi" .-> E
+        E -. "Không tìm được tài xế" .-> L
+        K -. "Thanh toán thất bại" .-> L
     end
+
 
     %% =========================
     %% KHÁCH HÀNG
     %% =========================
-    KH --- UC01
-    KH --- UC02
-    KH --- UC03
-    KH --- UC04
-    KH --- UC07
-    KH --- UC10
-    KH --- UC13
-    KH --- UC14
+    KH --- A
+    KH --- B
+    KH --- C
+    KH --- D
+    KH --- G
+    KH --- J
+    KH --- M
+    KH --- N
+
 
     %% =========================
     %% TÀI XẾ
     %% =========================
-    TX --- UC01
-    TX --- UC02
-    TX --- UC03
-    TX --- UC06
-    TX --- UC08
+    TX --- A
+    TX --- B
+    TX --- C
+    TX --- F
+    TX --- H
+    TX --- Q
+
 
     %% =========================
     %% NHÂN VIÊN VẬN HÀNH
     %% =========================
-    NV --- UC15
-    NV --- UC16
-    NV --- UC17
-    NV --- UC18
-    NV --- UC19
-    NV --- UC20
+    NV --- O
+    NV --- P
+    NV --- Q
+    NV --- R
+    NV --- S
+    NV --- T
+
 
     %% =========================
     %% BAN LÃNH ĐẠO
     %% =========================
-    BL --- UC21
+    BL --- U
+
 
     %% =========================
-    %% HỆ THỐNG BÊN NGOÀI
+    %% PAYMENT PROVIDER
     %% =========================
-    PP --- UC11
-    NP --- UC12
+    PP --- K
 
-    %% Các quan hệ trình tự nghiệp vụ được mô tả riêng
-    %% tại mục 12.5, không biểu diễn bằng include/extend trong sơ đồ này.
+
+    %% =========================
+    %% NOTIFICATION PROVIDER
+    %% =========================
+    NP --- L
 ```
 ## 13.5. Quan hệ giữa các Use Case cốt lõi
 
