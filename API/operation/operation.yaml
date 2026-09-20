@@ -1,0 +1,711 @@
+openapi: 3.0.3
+
+info:
+  title: CAB System Operation API
+  version: 1.0.0
+  description: >
+    API for operation staff to manage customers, drivers, vehicles and trips,
+    look up payment transactions, and handle trip error cases.
+
+servers:
+  - url: /api
+
+tags:
+  - name: Operation
+    description: Functions for CAB System operation staff.
+
+security:
+  - bearerAuth: []
+
+paths:
+
+  # =========================================================
+  # CUSTOMER MANAGEMENT - UC15 / FR28
+  # CRUD: Create, Read, Update, Delete
+  # =========================================================
+  /customers:
+    get:
+      tags: [Operation]
+      summary: List customers
+      operationId: listCustomers
+      responses:
+        '200':
+          description: Customer list returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags: [Operation]
+      summary: Create a customer
+      operationId: createCustomer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreate'
+      responses:
+        '201':
+          description: Customer created.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /customers/{customerId}:
+    get:
+      tags: [Operation]
+      summary: Get customer details
+      operationId: getCustomer
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+      responses:
+        '200':
+          description: Customer returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Operation]
+      summary: Update customer
+      operationId: updateCustomerByStaff
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerUpdate'
+      responses:
+        '200':
+          description: Customer updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Operation]
+      summary: Delete customer
+      operationId: deleteCustomer
+      parameters:
+        - $ref: '#/components/parameters/CustomerId'
+      responses:
+        '204':
+          description: Customer deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # =========================================================
+  # DRIVER MANAGEMENT - UC16 / FR29
+  # CRUD: Create, Read, Update, Delete
+  # =========================================================
+  /drivers:
+    get:
+      tags: [Operation]
+      summary: List drivers
+      operationId: listDrivers
+      responses:
+        '200':
+          description: Driver list returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags: [Operation]
+      summary: Create a driver account
+      operationId: createDriverByStaff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverCreate'
+      responses:
+        '201':
+          description: Driver account created.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /drivers/{driverId}:
+    get:
+      tags: [Operation]
+      summary: Get driver details
+      operationId: getDriver
+      parameters:
+        - $ref: '#/components/parameters/DriverId'
+      responses:
+        '200':
+          description: Driver returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Operation]
+      summary: Update driver
+      operationId: updateDriverByStaff
+      parameters:
+        - $ref: '#/components/parameters/DriverId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriverUpdate'
+      responses:
+        '200':
+          description: Driver updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Operation]
+      summary: Delete driver
+      operationId: deleteDriver
+      parameters:
+        - $ref: '#/components/parameters/DriverId'
+      responses:
+        '204':
+          description: Driver deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # =========================================================
+  # VEHICLE MANAGEMENT - UC17 / FR27
+  # CRUD: Create, Read, Update, Delete
+  # =========================================================
+  /vehicles:
+    get:
+      tags: [Operation]
+      summary: List vehicles
+      operationId: listVehicles
+      parameters:
+        - in: query
+          name: driverId
+          required: false
+          schema:
+            type: string
+          description: Filter vehicles by driver.
+      responses:
+        '200':
+          description: Vehicle list returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags: [Operation]
+      summary: Create a vehicle
+      operationId: createVehicle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleCreate'
+      responses:
+        '201':
+          description: Vehicle created.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /vehicles/{vehicleId}:
+    get:
+      tags: [Operation]
+      summary: Get vehicle details
+      operationId: getVehicle
+      parameters:
+        - $ref: '#/components/parameters/VehicleId'
+      responses:
+        '200':
+          description: Vehicle returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Operation]
+      summary: Update vehicle
+      operationId: updateVehicle
+      parameters:
+        - $ref: '#/components/parameters/VehicleId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleUpdate'
+      responses:
+        '200':
+          description: Vehicle updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Operation]
+      summary: Delete vehicle
+      operationId: deleteVehicle
+      parameters:
+        - $ref: '#/components/parameters/VehicleId'
+      responses:
+        '204':
+          description: Vehicle deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # =========================================================
+  # TRIP MANAGEMENT - UC18 / FR30
+  # CRUD: Create, Read, Update, Delete
+  # =========================================================
+  /trips:
+    get:
+      tags: [Operation]
+      summary: List trips
+      operationId: listTrips
+      parameters:
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: string
+          description: Filter trips by status.
+        - in: query
+          name: driverId
+          required: false
+          schema:
+            type: string
+          description: Filter trips by driver.
+      responses:
+        '200':
+          description: Trip list returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags: [Operation]
+      summary: Create a trip record
+      operationId: createTrip
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripCreate'
+      responses:
+        '201':
+          description: Trip created.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /trips/{tripId}:
+    get:
+      tags: [Operation]
+      summary: Get trip details
+      operationId: getTrip
+      parameters:
+        - $ref: '#/components/parameters/TripId'
+      responses:
+        '200':
+          description: Trip returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Operation]
+      summary: Update trip
+      operationId: updateTrip
+      parameters:
+        - $ref: '#/components/parameters/TripId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripUpdate'
+      responses:
+        '200':
+          description: Trip updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Operation]
+      summary: Delete trip
+      operationId: deleteTrip
+      parameters:
+        - $ref: '#/components/parameters/TripId'
+      responses:
+        '204':
+          description: Trip deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # =========================================================
+  # TRANSACTION LOOKUP - UC19 / FR31
+  # Read only: operation staff only needs to look up transactions.
+  # =========================================================
+  /transactions:
+    get:
+      tags: [Operation]
+      summary: Search payment transactions
+      operationId: lookupTransactions
+      parameters:
+        - in: query
+          name: tripId
+          required: false
+          schema:
+            type: string
+          description: Filter transactions by trip.
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: string
+          description: Filter transactions by payment status.
+      responses:
+        '200':
+          description: Transaction results returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  # =========================================================
+  # TRIP ERROR HANDLING - UC20 / FR32
+  # Create + Read + Update.
+  # Delete is intentionally omitted because the SRS requires
+  # operation staff to receive and handle error cases, not delete them.
+  # =========================================================
+  /trip-errors:
+    get:
+      tags: [Operation]
+      summary: List trip error cases
+      operationId: listTripErrors
+      parameters:
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: string
+          description: Filter trip error cases by status.
+        - in: query
+          name: tripId
+          required: false
+          schema:
+            type: string
+          description: Filter error cases by trip.
+      responses:
+        '200':
+          description: Trip error cases returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      tags: [Operation]
+      summary: Create a trip error case
+      operationId: createTripError
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripErrorCreate'
+      responses:
+        '201':
+          description: Trip error case created.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /trip-errors/{errorId}:
+    get:
+      tags: [Operation]
+      summary: Get trip error details
+      operationId: getTripError
+      parameters:
+        - $ref: '#/components/parameters/ErrorId'
+      responses:
+        '200':
+          description: Trip error case returned.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Operation]
+      summary: Update a trip error case
+      operationId: updateTripError
+      parameters:
+        - $ref: '#/components/parameters/ErrorId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripErrorUpdate'
+      responses:
+        '200':
+          description: Trip error case updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    CustomerId:
+      in: path
+      name: customerId
+      required: true
+      schema:
+        type: string
+
+    DriverId:
+      in: path
+      name: driverId
+      required: true
+      schema:
+        type: string
+
+    VehicleId:
+      in: path
+      name: vehicleId
+      required: true
+      schema:
+        type: string
+
+    TripId:
+      in: path
+      name: tripId
+      required: true
+      schema:
+        type: string
+
+    ErrorId:
+      in: path
+      name: errorId
+      required: true
+      schema:
+        type: string
+
+  schemas:
+
+    CustomerCreate:
+      type: object
+      required:
+        - fullName
+        - email
+      properties:
+        fullName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+
+    CustomerUpdate:
+      type: object
+      properties:
+        fullName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        status:
+          type: string
+
+    DriverCreate:
+      type: object
+      required:
+        - fullName
+        - email
+      properties:
+        fullName:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+
+    DriverUpdate:
+      type: object
+      properties:
+        fullName:
+          type: string
+        phone:
+          type: string
+        activityStatus:
+          type: string
+
+    VehicleCreate:
+      type: object
+      required:
+        - driverId
+        - vehicleType
+        - licensePlate
+      properties:
+        driverId:
+          type: string
+        vehicleType:
+          type: string
+        licensePlate:
+          type: string
+
+    VehicleUpdate:
+      type: object
+      properties:
+        vehicleType:
+          type: string
+        licensePlate:
+          type: string
+        status:
+          type: string
+
+    TripCreate:
+      type: object
+      required:
+        - bookingId
+        - driverId
+      properties:
+        bookingId:
+          type: string
+        driverId:
+          type: string
+
+    TripUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+        driverId:
+          type: string
+
+    TripErrorCreate:
+      type: object
+      required:
+        - tripId
+        - description
+      properties:
+        tripId:
+          type: string
+        description:
+          type: string
+
+    TripErrorUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+        resolution:
+          type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request data.
+
+    Unauthorized:
+      description: Authentication is required.
+
+    Forbidden:
+      description: Operation staff does not have permission to perform this action.
+
+    NotFound:
+      description: Requested resource was not found.
