@@ -1,6 +1,12 @@
 # CAB SYSTEM – TEST CASES
 
+Tài liệu Test Case cho hệ thống **CAB System – Nền tảng đặt xe**.
 
+Các Test Case được trình bày theo từng **Test Scenario** và sử dụng các cột:
+
+`Test Case ID` • `Test Scenario` • `Test Case` • `Preconditions` • `Test Steps` • `Test Data` • `Expected Result` • `Priority`
+
+---
 ## Tổng quan
 
 | Use Case | Tên Use Case | Số Test Case |
