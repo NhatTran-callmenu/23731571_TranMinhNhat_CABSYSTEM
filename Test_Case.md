@@ -1,12 +1,5 @@
 # CAB SYSTEM – TEST CASES
 
-> Bộ Test Case được xây dựng theo **21 Use Case trong SRS CAB System**. Số lượng Test Case của từng Use Case được điều chỉnh theo **mức độ phức tạp, số nhánh nghiệp vụ, Acceptance Criteria và ngoại lệ trong SRS**, thay vì ép mọi Use Case phải có cùng số lượng.
-
-> Các Use Case phức tạp như **UC05 – Tìm và phân công tài xế, UC08 – Thực hiện chuyến, UC10 – Thanh toán và UC11 – Xử lý thanh toán điện tử** được mở rộng lên **20 Test Case**. Các Use Case đơn giản hơn được rút gọn để tránh lan man.
-
-> Mỗi Use Case vẫn bao phủ các nhóm **Positive, Negative, Boundary, Trống và Sai định dạng** khi phù hợp. Các bước kiểm thử được viết theo thao tác nghiệp vụ/giao diện, không trình bày theo kiểu gọi API.
-
-> **Lưu ý Boundary:** SRS chưa quy định độ dài tối thiểu/tối đa cho nhiều trường như username/password, vì vậy không tự đặt các mốc không có trong tài liệu.
 
 ## Tổng quan
 
